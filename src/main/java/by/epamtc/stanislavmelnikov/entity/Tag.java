@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Objects;
 
 public class Tag implements Serializable {
-    public int tagId;
-    public String tagName;
+    private int tagId;
+    private String tagName;
 
     public int getTagId() {
         return tagId;

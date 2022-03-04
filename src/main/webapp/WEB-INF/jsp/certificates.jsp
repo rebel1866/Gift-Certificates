@@ -109,5 +109,6 @@
         </tr>
     </c:forEach>
 </table>
+<a href="${pageContext.request.contextPath}/add-certificate-form">Add certificate</a>
 </body>
 </html>

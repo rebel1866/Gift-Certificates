@@ -7,4 +7,5 @@ import java.util.Map;
 
 public interface CertificateDao {
     List<Certificate> findCertificates(Map<String,String> params);
+    void addCertificate(Certificate certificate);
 }

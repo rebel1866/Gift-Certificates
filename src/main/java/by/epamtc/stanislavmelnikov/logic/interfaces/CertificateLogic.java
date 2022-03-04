@@ -6,5 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface CertificateLogic {
-     List<Certificate> findCertificates(Map<String,String> params);
+    List<Certificate> findCertificates(Map<String, String> params);
+
+    void addCertificate(Certificate certificate);
 }

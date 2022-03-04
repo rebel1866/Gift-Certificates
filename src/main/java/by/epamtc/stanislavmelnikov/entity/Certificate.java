@@ -6,15 +6,15 @@ import java.util.List;
 import java.util.Objects;
 
 public class Certificate implements Serializable {
-    public long serialVersionID = 5665548654546545475L;
-    public int giftCertificateId;
-    public String certificateName;
-    public String description;
-    public int price;
-    public int duration;
-    public LocalDateTime creationDate;
-    public LocalDateTime lastUpdateTime;
-    public List<Tag> tags;
+    private long serialVersionID = 5665548654546545475L;
+    private int giftCertificateId;
+    private String certificateName;
+    private String description;
+    private int price;
+    private int duration;
+    private LocalDateTime creationDate;
+    private LocalDateTime lastUpdateTime;
+    private List<Tag> tags;
 
     public int getGiftCertificateId() {
         return giftCertificateId;

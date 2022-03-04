@@ -23,15 +23,21 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
     </bean>
 
     <bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
-        <property name="dataSource" ref="ds"></property>
+        <property name="dataSource" ref="ds"/>
     </bean>
 
     <bean id="dao" class="by.epamtc.stanislavmelnikov.dao.impl.CertificateDaoImpl">
-        <property name="jdbcTemplate" ref="jt"></property>
+        <property name="jdbcTemplate" ref="jt"/>
+    </bean>
+    <bean id="tagDao" class="by.epamtc.stanislavmelnikov.dao.impl.TagDaoImpl">
+        <property name="jdbcTemplate" ref="jt"/>
     </bean>
 
     <bean id="certificateLogic" class="by.epamtc.stanislavmelnikov.logic.impl.CertificateLogicImpl">
         <property name="certificateDao" ref="dao"/>
+    </bean>
+    <bean id="tagLogic" class="by.epamtc.stanislavmelnikov.logic.impl.TagLogicImpl">
+        <property name="tagDao" ref="tagDao"/>
     </bean>
 
 </beans>

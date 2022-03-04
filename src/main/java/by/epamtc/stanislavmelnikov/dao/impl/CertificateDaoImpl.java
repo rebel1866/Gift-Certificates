@@ -19,6 +19,11 @@ public class CertificateDaoImpl implements CertificateDao {
             " using (gift_certificate_id) inner join gifts.tags using (tag_id)";
     private static final String findTagsByIdSQL = "select tags.tag_id, tag_name from gifts.gift_certificates inner join gifts.cert_tags" +
             " using (gift_certificate_id) inner join gifts.tags using (tag_id) where gift_certificates.gift_certificate_id =?";
+    private static final String addCertificateSQL = "insert into gifts.gift_certificates (certificate_name, description, price, " +
+            "duration, creation_date, last_update_time) values (?,?,?,?,?,?)";
+    private static final String addCertificateTagsSQL = "insert into gifts.cert_tags (gift_certificate_id, tag_id) " +
+            "values ((select gift_certificate_id from gifts.gift_certificates order by gift_certificate_id desc limit 1),?)";
+
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
@@ -32,9 +37,19 @@ public class CertificateDaoImpl implements CertificateDao {
         certificates = certificates.stream().distinct().collect(Collectors.toList());
         for (Certificate certificate : certificates) {
             int certificateId = certificate.getGiftCertificateId();
-            List<Tag> tags = jdbcTemplate.query(findTagsByIdSQL, new TagMapper(),certificateId);
+            List<Tag> tags = jdbcTemplate.query(findTagsByIdSQL, new TagMapper(), certificateId);
             certificate.setTags(tags);
         }
         return certificates;
+    }
+
+    @Override
+    public void addCertificate(Certificate certificate) {
+        jdbcTemplate.update(addCertificateSQL, certificate.getCertificateName(), certificate.getDescription(), certificate.getPrice(),
+                certificate.getDuration(), certificate.getCreationDate(), certificate.getLastUpdateTime());
+        List<Tag> tags = certificate.getTags();
+        for (Tag tag : tags) {
+             jdbcTemplate.update(addCertificateTagsSQL, tag.getTagId());
+        }
     }
 }
