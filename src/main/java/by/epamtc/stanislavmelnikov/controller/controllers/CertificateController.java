@@ -70,4 +70,10 @@ public class CertificateController {
         model.addAttribute("certificate", certificate);
         return "certificate-full-info";
     }
+
+    @RequestMapping(value = "/delete-certificate", method = RequestMethod.POST)
+    public String deleteCertificate(@RequestParam("id") int id, Model model) {
+        certificateLogic.deleteCertificate(id);
+        return "redirect:/certificates";
+    }
 }

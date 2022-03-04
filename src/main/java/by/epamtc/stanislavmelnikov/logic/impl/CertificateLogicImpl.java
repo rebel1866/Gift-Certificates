@@ -30,4 +30,9 @@ public class CertificateLogicImpl implements CertificateLogic {
         certificate.setLastUpdateTime(now);
         certificateDao.addCertificate(certificate);
     }
+
+    @Override
+    public void deleteCertificate(int id) {
+        certificateDao.deleteCertificate(id);
+    }
 }

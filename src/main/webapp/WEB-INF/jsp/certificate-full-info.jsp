@@ -27,7 +27,12 @@ Tags:<br>
     </c:forEach>
 </form>
 <br><br>
-<a href="${pageContext.request.contextPath}/edit-certificate">Edit</a>&nbsp;&nbsp;
-<a href="${pageContext.request.contextPath}/delete-certificate">Delete</a>
+
+<form method="post" action="${pageContext.request.contextPath}/edit-certificate">
+    <button name="id" value="${certificate.giftCertificateId}">Edit</button>
+</form>
+<form method="post" action="${pageContext.request.contextPath}/delete-certificate">
+    <button name="id" value="${certificate.giftCertificateId}">Delete</button>
+</form>
 </body>
 </html>

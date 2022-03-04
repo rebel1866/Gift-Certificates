@@ -23,6 +23,7 @@ public class CertificateDaoImpl implements CertificateDao {
             "duration, creation_date, last_update_time) values (?,?,?,?,?,?)";
     private static final String addCertificateTagsSQL = "insert into gifts.cert_tags (gift_certificate_id, tag_id) " +
             "values ((select gift_certificate_id from gifts.gift_certificates order by gift_certificate_id desc limit 1),?)";
+    private static final String removeCertificateSql = "delete from gifts.gift_certificates where gift_certificate_id = ?";
 
 
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
@@ -49,7 +50,12 @@ public class CertificateDaoImpl implements CertificateDao {
                 certificate.getDuration(), certificate.getCreationDate(), certificate.getLastUpdateTime());
         List<Tag> tags = certificate.getTags();
         for (Tag tag : tags) {
-             jdbcTemplate.update(addCertificateTagsSQL, tag.getTagId());
+            jdbcTemplate.update(addCertificateTagsSQL, tag.getTagId());
         }
+    }
+
+    @Override
+    public void deleteCertificate(int id) {
+        jdbcTemplate.update(removeCertificateSql, id);
     }
 }

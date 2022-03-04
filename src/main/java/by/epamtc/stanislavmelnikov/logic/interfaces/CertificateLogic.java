@@ -9,4 +9,6 @@ public interface CertificateLogic {
     List<Certificate> findCertificates(Map<String, String> params);
 
     void addCertificate(Certificate certificate);
+
+    void deleteCertificate(int id);
 }
