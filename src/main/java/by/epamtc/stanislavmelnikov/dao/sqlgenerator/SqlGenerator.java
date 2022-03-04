@@ -15,12 +15,14 @@ public class SqlGenerator {
     };
     private static final Action concatPriceFrom = (sql, key, value) -> sql.append("price" + ">=" + value);
     private static final Action concatPriceTo = (sql, key, value) -> sql.append("price" + "<=" + value);
+    private static final Action concatCertificate = (sql, key, value) -> sql.append("gift_certificate_id" + " = " + value);
 
     static {
         actions.put("price_from", concatPriceFrom);
         actions.put("price_to", concatPriceTo);
         actions.put("certificate_name", concatLike);
         actions.put("tag_name", concatLike);
+        actions.put("giftCertificateId",concatCertificate);
     }
 
     public static String generateSQL(String sourceSql, Map<String, String> params) {

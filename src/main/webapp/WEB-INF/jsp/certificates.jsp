@@ -104,7 +104,9 @@
                 </form>
             </td>
             <td>
-              <a href="">Watch full info</a>
+              <form method="post" action="${pageContext.request.contextPath}/certificate-info">
+                  <button name="giftCertificateId" value="${certificate.giftCertificateId}">Watch full info</button>
+              </form>
             </td>
         </tr>
     </c:forEach>

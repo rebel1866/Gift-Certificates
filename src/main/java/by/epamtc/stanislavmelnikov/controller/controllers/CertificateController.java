@@ -61,4 +61,13 @@ public class CertificateController {
         certificateLogic.addCertificate(certificate);
         return "redirect:/certificates";
     }
+
+    @RequestMapping(value = "/certificate-info", method = RequestMethod.POST)
+    public String showCertificateInfo(@RequestParam("giftCertificateId") int giftCertificateId, Model model) {
+        Map<String, String> params = new HashMap<>();
+        params.put("giftCertificateId", String.valueOf(giftCertificateId));
+        Certificate certificate = certificateLogic.findCertificates(params).get(0);
+        model.addAttribute("certificate", certificate);
+        return "certificate-full-info";
+    }
 }
