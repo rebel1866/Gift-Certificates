@@ -3,12 +3,14 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:p="http://www.springframework.org/schema/p"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
 http://www.springframework.org/schema/context  
-http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+http://www.springframework.org/schema/context/spring-context-3.0.xsd http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd">
+    <mvc:annotation-driven/>
 
-    <context:component-scan base-package="by.epamtc.stanislavmelnikov.controller"></context:component-scan>
+    <context:component-scan base-package="com.epam.esm.controller"></context:component-scan>
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix" value="/WEB-INF/jsp/"></property>
@@ -26,22 +28,29 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd">
         <property name="dataSource" ref="ds"/>
     </bean>
 
-    <bean id="dao" class="by.epamtc.stanislavmelnikov.dao.impl.CertificateDaoImpl">
+    <bean id="dao" class="com.epam.esm.dao.impl.CertificateDaoImpl">
         <property name="jdbcTemplate" ref="jt"/>
     </bean>
-    <bean id="tagDao" class="by.epamtc.stanislavmelnikov.dao.impl.TagDaoImpl">
+    <bean id="tagDao" class="com.epam.esm.dao.impl.TagDaoImpl">
         <property name="jdbcTemplate" ref="jt"/>
     </bean>
 
-    <bean id="certificateLogic" class="by.epamtc.stanislavmelnikov.logic.impl.CertificateLogicImpl">
+    <bean id="certificateLogic" class="com.epam.esm.logic.impl.CertificateLogicImpl">
         <property name="certificateDao" ref="dao"/>
     </bean>
-    <bean id="tagLogic" class="by.epamtc.stanislavmelnikov.logic.impl.TagLogicImpl">
+    <bean id="tagLogic" class="com.epam.esm.logic.impl.TagLogicImpl">
         <property name="tagDao" ref="tagDao"/>
     </bean>
 
+    <bean class = "org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name = "exceptionMappings">
+            <props>
+                <prop key = "com.epam.esm.controller.exceptions.UiControllerException">
+                   error
+                </prop>
+            </props>
+        </property>
+        <property name = "defaultErrorView" value = "error"/>
+    </bean>
+
 </beans>
-
-
-
-

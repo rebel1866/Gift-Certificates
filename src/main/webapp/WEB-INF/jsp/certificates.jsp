@@ -49,31 +49,32 @@
 </div>
 <form action="${pageContext.request.contextPath}/certificates" method="post" onsubmit="disableEmptyInputs(this)">
     <label>Name:
-        <input type="text" name="certificate_name"/>
+        <input type="text" name="certificateName"/>
     </label>
     <label>Tag:
-        <input type="text" name="tag_name"/>
+        <input type="text" name="tagName"/>
     </label><br><br>
     <label>Price from:
-        <input class="price" type="text" name="price_from"/>
+        <input class="price" type="text" name="priceFrom"/>
     </label>
     <label>Price to:
-        <input class="price" type="text" name="price_to"/>
+        <input class="price" type="text" name="priceTo"/>
     </label><br><br>
     <input id="submit" type="submit" value="Search"/>
 </form>
+${message}
 <form action="${pageContext.request.contextPath}/certificates" method="post" onsubmit="disableEmptyInputs(this)">
-    <input type="hidden" name="certificate_name" value="${params.certificate_name}"/>
-    <input type="hidden" name="tag_name" value="${params.tag_name}"/>
-    <input type="hidden" name="price_from" value="${params.price_from}"/>
-    <input type="hidden" name="price_to" value="${params.price_to}"/>
+    <input type="hidden" name="certificateName" value="${params.certificateName}"/>
+    <input type="hidden" name="tagName" value="${params.tagName}"/>
+    <input type="hidden" name="priceFrom" value="${params.priceFrom}"/>
+    <input type="hidden" name="priceTo" value="${params.priceTo}"/>
     Sort by :
     <button name="sorting" value="order by price">price</button>
     <button name="sorting" value="order by certificate_name">name</button>
     <button name="sorting" value="order by creation_date">date</button>
     <button name="sorting" value="order by certificate_name, creation_date">name and date</button>
     <label>Sorting order:
-        <select name="sorting_order">
+        <select name="sortingOrder">
             <option value="asc">Asc</option>
             <option value="desc">Desc</option>
         </select>
@@ -104,8 +105,8 @@
                 </form>
             </td>
             <td>
-              <form method="post" action="${pageContext.request.contextPath}/certificate-info">
-                  <button name="giftCertificateId" value="${certificate.giftCertificateId}">Watch full info</button>
+              <form method="post" action="${pageContext.request.contextPath}/delete-certificate">
+                  <button name="id" value="${certificate.giftCertificateId}">Delete</button>
               </form>
             </td>
         </tr>
