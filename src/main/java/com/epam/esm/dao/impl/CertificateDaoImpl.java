@@ -8,6 +8,7 @@ import com.epam.esm.dao.mappers.TagMapper;
 import com.epam.esm.entity.Certificate;
 import com.epam.esm.entity.Tag;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
@@ -32,11 +33,12 @@ public class CertificateDaoImpl implements CertificateDao {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    @Override    //transactions
+    @Override
+    @Transactional
     public List<Certificate> findCertificates(Map<String, String> params) throws DaoException {
         String targetSql = SqlGenerator.generateSQL(certificatesSQL, params);
-        List<Certificate> certificates = jdbcTemplate.query(targetSql, new CertificateMapper()).stream().distinct().
-                collect(Collectors.toList());
+        List<Certificate> certificates = jdbcTemplate.query(targetSql, new CertificateMapper());
+        certificates = certificates.stream().distinct().collect(Collectors.toList());
         for (Certificate certificate : certificates) {
             int certificateId = certificate.getGiftCertificateId();
             List<Tag> tags = jdbcTemplate.query(findTagsByIdSQL, new TagMapper(), certificateId);
@@ -47,6 +49,7 @@ public class CertificateDaoImpl implements CertificateDao {
     }
 
     @Override
+    @Transactional
     public void addCertificate(Certificate certificate) throws DaoException {
         int rowAffected = jdbcTemplate.update(addCertificateSQL, certificate.getCertificateName(),
                 certificate.getDescription(), certificate.getPrice(), certificate.getDuration(),
@@ -66,6 +69,7 @@ public class CertificateDaoImpl implements CertificateDao {
     }
 
     @Override
+    @Transactional
     public void updateCertificate(Map<String, String> params) throws DaoException {
         String idStr = String.valueOf(params.remove("giftCertificateId"));
         int id = Integer.parseInt(idStr);

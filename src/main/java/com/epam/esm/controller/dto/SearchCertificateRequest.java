@@ -2,20 +2,20 @@ package com.epam.esm.controller.dto;
 
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
-import java.util.Objects;
+
 
 public class SearchCertificateRequest {
     private String certificateName;
     private String tagName;
-    @Positive(message = "Field price_from must be positive number")
+    @Positive(message = "Field priceFrom must be positive number")
     private Integer priceFrom;
-    @Positive(message = "Field price_to must be positive number")
+    @Positive(message = "Field priceTo must be positive number")
     private Integer priceTo;
     @Pattern(regexp = "order by price|order by certificate_name|order by creation_date|order by certificate_name, creation_date",
-    message = "Acceptable values for field \"sorting\" are: 1)order by price 2)order by certificate_name " +
-            "3)order by creation_date 4)order by certificate_name, creation_date")
+            message = "Acceptable values for field \"sorting\" are: 1)order by price 2)order by certificate_name " +
+                    "3)order by creation_date 4)order by certificate_name, creation_date")
     private String sorting;
-    @Pattern(regexp = "asc|desc",message = "sorting_order must be: \"asc\" or \"desc\"")
+    @Pattern(regexp = "asc|desc", message = "sorting_order must be: \"asc\" or \"desc\"")
     private String sortingOrder;
 
     public String getCertificateName() {

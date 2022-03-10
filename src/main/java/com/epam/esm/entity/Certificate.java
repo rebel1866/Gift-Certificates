@@ -40,7 +40,7 @@ public class Certificate implements Serializable {
         return giftCertificateId;
     }
 
-    public void setGiftCertificateId(int giftCertificateId) {
+    public void setGiftCertificateId(Integer giftCertificateId) {
         this.giftCertificateId = giftCertificateId;
     }
 
@@ -64,7 +64,7 @@ public class Certificate implements Serializable {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 
@@ -72,7 +72,7 @@ public class Certificate implements Serializable {
         return duration;
     }
 
-    public void setDuration(int duration) {
+    public void setDuration(Integer duration) {
         this.duration = duration;
     }
 
@@ -101,6 +101,19 @@ public class Certificate implements Serializable {
     }
 
     @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Certificate that = (Certificate) o;
+        return Objects.equals(giftCertificateId, that.giftCertificateId) && Objects.equals(certificateName, that.certificateName) && Objects.equals(description, that.description) && Objects.equals(price, that.price) && Objects.equals(duration, that.duration) && Objects.equals(tags, that.tags) && Objects.equals(creationDate, that.creationDate) && Objects.equals(lastUpdateTime, that.lastUpdateTime);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(giftCertificateId, certificateName, description, price, duration, tags, creationDate, lastUpdateTime);
+    }
+
+    @Override
     public String toString() {
         return "Certificate{" +
                 "giftCertificateId=" + giftCertificateId +
@@ -112,22 +125,5 @@ public class Certificate implements Serializable {
                 ", creationDate=" + creationDate +
                 ", lastUpdateTime=" + lastUpdateTime +
                 '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Certificate that = (Certificate) o;
-        return giftCertificateId == that.giftCertificateId && price == that.
-                price && duration == that.duration && Objects.equals(certificateName, that.certificateName) && Objects.
-                equals(description, that.description) && Objects.equals(creationDate, that.creationDate) && Objects.
-                equals(lastUpdateTime, that.lastUpdateTime) && Objects.equals(tags, that.tags);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(giftCertificateId, certificateName, description, price, duration,
-                creationDate, lastUpdateTime, tags);
     }
 }
